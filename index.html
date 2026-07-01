@@ -479,38 +479,7 @@
     </footer>
   </div>
 
-  <!-- SUPABASE CONTACT FORM -->
-  <script type="module">
-    import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-
-    const supabase = createClient(
-      'https://qxixaiueynntfetyykjn.supabase.co',
-      'sb_publishable_lgWer7KNJU4mRs94rQ4kSQ_081xd5Rs'
-    );
-
-    const form = document.getElementById('contactForm');
-    const status = document.getElementById('formStatus');
-
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      status.textContent = 'Envoi en cours…';
-
-      const nom = document.getElementById('nom').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
-
-      const { error } = await supabase
-        .from('messages')
-        .insert([{ nom, email, message }]);
-
-      if (error) {
-        status.textContent = 'Une erreur est survenue. Veuillez réessayer.';
-      } else {
-        status.textContent = 'Message envoyé — je vous réponds sous 24 h.';
-        form.reset();
-      }
-    });
-  </script>
+  <script type="module" src="/contact.js"></script>
 
   <script>
     if ('serviceWorker' in navigator) {
