@@ -174,28 +174,82 @@
       .tarifs-grid { grid-template-columns: 1fr; }
     }
 
-    .tarif-card {
+    /* Flip card wrapper */
+    .tarif-flip {
+      perspective: 1000px;
+      height: 220px;
+    }
+
+    @media (max-width: 700px) {
+      .tarif-flip { height: 200px; }
+    }
+
+    .tarif-flip-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
+    }
+
+    .tarif-flip:hover .tarif-flip-inner {
+      transform: rotateY(180deg);
+    }
+
+    .tarif-front,
+    .tarif-back {
+      position: absolute;
+      inset: 0;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
       border: 1px solid #E0E0E0;
+      background: #FFFFFF;
+    }
+
+    /* Recto */
+    .tarif-front {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       padding: 2rem 1.5rem;
+      text-align: center;
     }
 
-    .tarif-card h3 {
+    .tarif-front h3 {
       font-family: 'Georgia', serif;
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: normal;
-      margin-bottom: 0.5rem;
       color: #111111;
+      margin-bottom: 0.75rem;
     }
 
-    .tarif-card .prix {
+    .tarif-front .prix {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.85rem;
       color: #999999;
-      margin-bottom: 1.25rem;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.06em;
     }
 
-    .tarif-card ul {
+    .tarif-front .hint {
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #CCCCCC;
+      margin-top: 1.75rem;
+    }
+
+    /* Verso */
+    .tarif-back {
+      transform: rotateY(180deg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 2rem 1.5rem;
+    }
+
+    .tarif-back ul {
       list-style: none;
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.85rem;
@@ -203,7 +257,7 @@
       line-height: 1.9;
     }
 
-    .tarif-card ul li::before {
+    .tarif-back ul li::before {
       content: "— ";
       color: #BBBBBB;
     }
@@ -391,36 +445,61 @@
     <section id="tarifs">
       <p class="section-label">Tarifs</p>
       <div class="tarifs-grid">
-        <div class="tarif-card">
-          <h3>Essentiel</h3>
-          <div class="prix">CHF 400</div>
-          <ul>
-            <li>Site one-page</li>
-            <li>Design sur mesure</li>
-            <li>Formulaire de contact</li>
-            <li>Responsive mobile</li>
-          </ul>
+
+        <div class="tarif-flip">
+          <div class="tarif-flip-inner">
+            <div class="tarif-front">
+              <h3>Essentiel</h3>
+              <div class="prix">CHF 400</div>
+              <span class="hint">Survoler pour le détail</span>
+            </div>
+            <div class="tarif-back">
+              <ul>
+                <li>Site one-page</li>
+                <li>Design sur mesure</li>
+                <li>Formulaire de contact</li>
+                <li>Responsive mobile</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="tarif-card">
-          <h3>Pro</h3>
-          <div class="prix">CHF 750</div>
-          <ul>
-            <li>Jusqu'à 5 pages</li>
-            <li>Blog ou portfolio</li>
-            <li>Optimisation SEO</li>
-            <li>Responsive mobile</li>
-          </ul>
+
+        <div class="tarif-flip">
+          <div class="tarif-flip-inner">
+            <div class="tarif-front">
+              <h3>Pro</h3>
+              <div class="prix">CHF 750</div>
+              <span class="hint">Survoler pour le détail</span>
+            </div>
+            <div class="tarif-back">
+              <ul>
+                <li>Jusqu'à 5 pages</li>
+                <li>Blog ou portfolio</li>
+                <li>Optimisation SEO</li>
+                <li>Responsive mobile</li>
+              </ul>
+            </div>
+          </div>
         </div>
-        <div class="tarif-card">
-          <h3>Sur mesure</h3>
-          <div class="prix">Sur devis</div>
-          <ul>
-            <li>Projet complexe</li>
-            <li>Fonctionnalités spécifiques</li>
-            <li>Intégrations tierces</li>
-            <li>Accompagnement continu</li>
-          </ul>
+
+        <div class="tarif-flip">
+          <div class="tarif-flip-inner">
+            <div class="tarif-front">
+              <h3>Sur mesure</h3>
+              <div class="prix">Sur devis</div>
+              <span class="hint">Survoler pour le détail</span>
+            </div>
+            <div class="tarif-back">
+              <ul>
+                <li>Projet complexe</li>
+                <li>Fonctionnalités spécifiques</li>
+                <li>Intégrations tierces</li>
+                <li>Accompagnement continu</li>
+              </ul>
+            </div>
+          </div>
         </div>
+
       </div>
       <p class="tarifs-note">Les tarifs ne comprennent pas les frais annuels d'hébergement et de nom de domaine, facturés CHF 150 à 200 par an. Ce forfait inclut l'hébergement, le nom de domaine et les petites modifications. Les modifications importantes sont facturées séparément sur devis.</p>
     </section>
