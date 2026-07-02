@@ -192,7 +192,8 @@
       transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
     }
 
-    .tarif-flip:hover .tarif-flip-inner {
+    .tarif-flip:hover .tarif-flip-inner,
+    .tarif-flip.flipped .tarif-flip-inner {
       transform: rotateY(180deg);
     }
 
@@ -576,6 +577,17 @@
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/service-worker.js');
     }
+  </script>
+
+  <script>
+    (function () {
+      var cards = document.querySelectorAll('.tarif-flip');
+      cards.forEach(function (card) {
+        card.addEventListener('click', function () {
+          card.classList.toggle('flipped');
+        });
+      });
+    })();
   </script>
 
 </body>
