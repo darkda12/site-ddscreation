@@ -176,39 +176,23 @@
 
     /* Flip card wrapper */
     .tarif-flip {
-      perspective: 1000px;
+      position: relative;
       height: 220px;
-      cursor: pointer;
     }
 
     @media (max-width: 700px) {
-      .tarif-flip { height: 200px; }
-    }
-
-    .tarif-flip-inner {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.55s cubic-bezier(0.45, 0.05, 0.55, 0.95);
-    }
-
-    .tarif-flip:hover .tarif-flip-inner,
-    .tarif-flip.flipped .tarif-flip-inner {
-      transform: rotateY(180deg);
+      .tarif-flip { height: 240px; }
     }
 
     .tarif-front,
     .tarif-back {
       position: absolute;
       inset: 0;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
       border: 1px solid #E0E0E0;
       background: #FFFFFF;
+      transition: opacity 0.25s ease;
     }
 
-    /* Recto */
     .tarif-front {
       display: flex;
       flex-direction: column;
@@ -216,6 +200,12 @@
       justify-content: center;
       padding: 2rem 1.5rem;
       text-align: center;
+      opacity: 1;
+    }
+
+    .tarif-flip.flipped .tarif-front {
+      opacity: 0;
+      pointer-events: none;
     }
 
     .tarif-front h3 {
@@ -233,22 +223,36 @@
       letter-spacing: 0.06em;
     }
 
-    .tarif-front .hint {
+    .flip-btn {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       font-size: 0.65rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: #CCCCCC;
+      color: #111111;
+      background: none;
+      border: 1px solid #111111;
+      padding: 0.5rem 1rem;
       margin-top: 1.75rem;
+      cursor: pointer;
     }
 
-    /* Verso */
+    .flip-btn:hover {
+      background: #111111;
+      color: #FFFFFF;
+    }
+
     .tarif-back {
-      transform: rotateY(180deg);
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 2rem 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .tarif-flip.flipped .tarif-back {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .tarif-back ul {
@@ -257,6 +261,7 @@
       font-size: 0.85rem;
       color: #555555;
       line-height: 1.9;
+      margin-bottom: 1.25rem;
     }
 
     .tarif-back ul li::before {
@@ -396,31 +401,6 @@
     footer a:hover {
       color: #111111;
     }
-
-    /* ── FLIP MOBILE / TOUCH FALLBACK ── */
-    @media (max-width: 700px) {
-      .tarif-front {
-        transition: opacity 0.3s ease;
-        opacity: 1;
-      }
-      .tarif-back {
-        transition: opacity 0.3s ease;
-        opacity: 0;
-      }
-      .tarif-flip.flipped .tarif-front { opacity: 0; }
-      .tarif-flip.flipped .tarif-back { opacity: 1; }
-    }
-
-    .touch .tarif-front {
-      transition: opacity 0.3s ease;
-      opacity: 1;
-    }
-    .touch .tarif-back {
-      transition: opacity 0.3s ease;
-      opacity: 0;
-    }
-    .touch .tarif-flip.flipped .tarif-front { opacity: 0; }
-    .touch .tarif-flip.flipped .tarif-back { opacity: 1; }
   </style>
 </head>
 <body>
@@ -474,56 +454,53 @@
       <div class="tarifs-grid">
 
         <div class="tarif-flip">
-          <div class="tarif-flip-inner">
-            <div class="tarif-front">
-              <h3>Essentiel</h3>
-              <div class="prix">CHF 400</div>
-              <span class="hint">Toucher pour le détail</span>
-            </div>
-            <div class="tarif-back">
-              <ul>
-                <li>Site one-page</li>
-                <li>Design sur mesure</li>
-                <li>Formulaire de contact</li>
-                <li>Responsive mobile</li>
-              </ul>
-            </div>
+          <div class="tarif-front">
+            <h3>Essentiel</h3>
+            <div class="prix">CHF 400</div>
+            <button class="flip-btn" type="button">Cliquer pour le détail</button>
+          </div>
+          <div class="tarif-back">
+            <ul>
+              <li>Site one-page</li>
+              <li>Design sur mesure</li>
+              <li>Formulaire de contact</li>
+              <li>Responsive mobile</li>
+            </ul>
+            <button class="flip-btn" type="button">Retour</button>
           </div>
         </div>
 
         <div class="tarif-flip">
-          <div class="tarif-flip-inner">
-            <div class="tarif-front">
-              <h3>Pro</h3>
-              <div class="prix">CHF 750</div>
-              <span class="hint">Toucher pour le détail</span>
-            </div>
-            <div class="tarif-back">
-              <ul>
-                <li>Jusqu'à 5 pages</li>
-                <li>Blog ou portfolio</li>
-                <li>Optimisation SEO</li>
-                <li>Responsive mobile</li>
-              </ul>
-            </div>
+          <div class="tarif-front">
+            <h3>Pro</h3>
+            <div class="prix">CHF 750</div>
+            <button class="flip-btn" type="button">Cliquer pour le détail</button>
+          </div>
+          <div class="tarif-back">
+            <ul>
+              <li>Jusqu'à 5 pages</li>
+              <li>Blog ou portfolio</li>
+              <li>Optimisation SEO</li>
+              <li>Responsive mobile</li>
+            </ul>
+            <button class="flip-btn" type="button">Retour</button>
           </div>
         </div>
 
         <div class="tarif-flip">
-          <div class="tarif-flip-inner">
-            <div class="tarif-front">
-              <h3>Sur mesure</h3>
-              <div class="prix">Sur devis</div>
-              <span class="hint">Toucher pour le détail</span>
-            </div>
-            <div class="tarif-back">
-              <ul>
-                <li>Projet complexe</li>
-                <li>Fonctionnalités spécifiques</li>
-                <li>Intégrations tierces</li>
-                <li>Accompagnement continu</li>
-              </ul>
-            </div>
+          <div class="tarif-front">
+            <h3>Sur mesure</h3>
+            <div class="prix">Sur devis</div>
+            <button class="flip-btn" type="button">Cliquer pour le détail</button>
+          </div>
+          <div class="tarif-back">
+            <ul>
+              <li>Projet complexe</li>
+              <li>Fonctionnalités spécifiques</li>
+              <li>Intégrations tierces</li>
+              <li>Accompagnement continu</li>
+            </ul>
+            <button class="flip-btn" type="button">Retour</button>
           </div>
         </div>
 
