@@ -396,6 +396,23 @@
     footer a:hover {
       color: #111111;
     }
+
+    /* ── FLIP MOBILE / TOUCH FALLBACK ── */
+    @media (max-width: 700px) {
+      .tarif-front,
+      .tarif-back {
+        transition: opacity 0.3s ease;
+      }
+      .tarif-flip.flipped .tarif-front { opacity: 0; }
+      .tarif-flip.flipped .tarif-back { opacity: 1; }
+    }
+
+    .touch .tarif-front,
+    .touch .tarif-back {
+      transition: opacity 0.3s ease;
+    }
+    .touch .tarif-flip.flipped .tarif-front { opacity: 0; }
+    .touch .tarif-flip.flipped .tarif-back { opacity: 1; }
   </style>
 </head>
 <body>
