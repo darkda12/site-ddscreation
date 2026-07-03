@@ -399,17 +399,25 @@
 
     /* ── FLIP MOBILE / TOUCH FALLBACK ── */
     @media (max-width: 700px) {
-      .tarif-front,
+      .tarif-front {
+        transition: opacity 0.3s ease;
+        opacity: 1;
+      }
       .tarif-back {
         transition: opacity 0.3s ease;
+        opacity: 0;
       }
       .tarif-flip.flipped .tarif-front { opacity: 0; }
       .tarif-flip.flipped .tarif-back { opacity: 1; }
     }
 
-    .touch .tarif-front,
+    .touch .tarif-front {
+      transition: opacity 0.3s ease;
+      opacity: 1;
+    }
     .touch .tarif-back {
       transition: opacity 0.3s ease;
+      opacity: 0;
     }
     .touch .tarif-flip.flipped .tarif-front { opacity: 0; }
     .touch .tarif-flip.flipped .tarif-back { opacity: 1; }
