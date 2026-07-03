@@ -573,27 +573,8 @@
   </div>
 
   <script type="module" src="/contact.js"></script>
-
   <script src="/sw-register.js"></script>
-
-  <script>
-    (function () {
-      var cards = document.querySelectorAll('.tarif-flip');
-      cards.forEach(function (card) {
-        card.addEventListener('click', function () {
-          card.classList.toggle('flipped');
-        });
-      });
-    })();
-  </script>
-
-  <script>
-    document.querySelectorAll('.tarif-card').forEach(function(card) {
-      card.addEventListener('click', function() {
-        card.classList.toggle('flipped');
-      });
-    });
-  </script>
+  <script src="/flip.js"></script>
 
 </body>
 </html>
